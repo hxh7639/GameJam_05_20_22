@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class BeatChecker : MonoBehaviour
 {
+    [SerializeField] private Songs_SO _songs_SO = null;
     [SerializeField] private AudioClip _audioClip = null;
     [SerializeField] private AudioSource _audioSource = null;
 
@@ -18,7 +19,7 @@ public class BeatChecker : MonoBehaviour
     [SerializeField] private float _first4thBeatTimer = 0;
 
     [Header("info only")] 
-    [SerializeField] private float _secPerBeat = 0;
+    [SerializeField] private float _secPerBeatScaled = 0;
     [SerializeField] private double _graceTimer;
     [SerializeField] private double _currentTime;
     [SerializeField] private double _songStartedTime = 0;
@@ -28,12 +29,8 @@ public class BeatChecker : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
-        _audioSource.clip = _audioClip;
-        _secPerBeat = 60 / _beatsPerMin;
-        _secPerBeat = _secPerBeat * _beatScale;
-        
-        
+    {    
+
     }
 
     // Update is called once per frame
@@ -51,6 +48,12 @@ public class BeatChecker : MonoBehaviour
 
     private void StartGame()
     {
+        _audioSource.clip = _songs_SO._audioClip;
+        _beatsPerMin = _songs_SO._beatsPerMin;
+        _first4thBeatTimer = _songs_SO._first4thBeatTimer;
+
+        _secPerBeatScaled = _songs_SO._secPerBeatScaled;
+
         _audioSource.Play();
         _songStartedTime = Time.timeAsDouble;
     }
@@ -64,8 +67,11 @@ public class BeatChecker : MonoBehaviour
         if (!_isBeatStarted && (_first4thBeatTimer) <= _currentSongPosition)
         {
             Debug.Log("beat counted, 1st beat");
+            _tempImage.color = Color.green;            
             _lastBeatTimer = Time.timeAsDouble;
+            _graceTimer = Time.timeAsDouble + _hitGraceTimer;
             _isBeatStarted = true;
+            
         }
 
         if(!_isBeatStarted)
@@ -79,7 +85,7 @@ public class BeatChecker : MonoBehaviour
         }
 
 
-        if( (_currentTime - _lastBeatTimer) > (_secPerBeat))
+        if( (_currentTime - _lastBeatTimer) > (_secPerBeatScaled))
         {
             Debug.Log("record new beat");
             _tempImage.color = Color.green;
