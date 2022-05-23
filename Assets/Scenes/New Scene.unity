@@ -305,7 +305,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.157
+  m_Volume: 0.421
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -401,16 +401,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7aa670cfb0e672640a8897e1a7ed6b39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _audioClip: {fileID: 8300000, guid: 940a42a6dd9819f44887122d708995ae, type: 3}
+  _audioClip: {fileID: 8300000, guid: fc0ac1ed0366daf479446b29a4adadb1, type: 3}
   _audioSource: {fileID: 596717532}
   _time: 0
   _beatTimer: 0
-  _firstBeatTimer: 0
-  _beatsPerMin: 140
+  _firstBeatTimer: 1.86
+  _beatsPerMin: 100
   _secPerBeat: 0
   _tempImage: {fileID: 1924285817}
   _hitGraceTimer: 0.1
-  _beatStarted: 0
+  _isSongStarted: 0
+  _lastBeatTimer: 0
+  _timeSinceLastBeat: 0
+  _graceTimer: 0
+  _beatScale: 4
+  _updateTimeOffset: 0.01
+  _isBeatStarted: 0
+  _songStartedTime: 0
+  _timeNew: 0
 --- !u!4 &596717534
 Transform:
   m_ObjectHideFlags: 0
