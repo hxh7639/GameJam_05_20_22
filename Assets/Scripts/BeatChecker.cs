@@ -25,6 +25,14 @@ public class BeatChecker : MonoBehaviour
     [SerializeField] private double _lastBeatTimer = 0;
     [SerializeField] private int _beatIndex = 0;
 
+    [SerializeField] private List<int> _currentListOfArrows;
+
+    //public
+    public void UpdateCurrentArrows(List<int> list)
+    {
+        _currentListOfArrows = list;
+    }
+
     // Start is called before the first frame update
     void Start()
     {    

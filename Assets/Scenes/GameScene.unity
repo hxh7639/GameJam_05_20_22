@@ -186,12 +186,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &271086651 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8658811942170584184, guid: d62e0bff0eb833e42aef7617544cf64e,
-    type: 3}
-  m_PrefabInstance: {fileID: 8745416702742382181}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &410575999 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6031504571646544167, guid: d62e0bff0eb833e42aef7617544cf64e,
@@ -239,8 +233,9 @@ GameObject:
   - component: {fileID: 596717534}
   - component: {fileID: 596717533}
   - component: {fileID: 596717532}
+  - component: {fileID: 596717535}
   m_Layer: 0
-  m_Name: BeatChecker
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -368,6 +363,7 @@ MonoBehaviour:
   _isBeatStarted: 0
   _lastBeatTimer: 0
   _beatIndex: 1
+  _currentListOfArrows: 
 --- !u!4 &596717534
 Transform:
   m_ObjectHideFlags: 0
@@ -383,6 +379,47 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &596717535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 596717531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9d9c696269bd5543b58eb5b5890b5ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _beatChecker: {fileID: 596717533}
+  _currentListOfArrows: 
+  _nextListOfArrows: 
+  _currentArrow: 0
+  _currentLevel: 0
+  _nextLevel: 0
+  _arrowsToCreate: 0
+  _lineOfArrowsImagesCurrent:
+  - {fileID: 410575999}
+  - {fileID: 60917087}
+  - {fileID: 1201956007}
+  - {fileID: 458624391}
+  - {fileID: 1931287546}
+  - {fileID: 1073780791}
+  - {fileID: 764294161}
+  _lineOfArrowsImagesNext:
+  - {fileID: 2146184936}
+  - {fileID: 899202106}
+  - {fileID: 1402326088}
+  - {fileID: 2065681664}
+  - {fileID: 1476970386}
+  - {fileID: 870969565}
+  - {fileID: 457077692}
+  _arrowSprites:
+  - {fileID: 21300000, guid: 067be74ecf0444595a2a4825969316ba, type: 3}
+  - {fileID: 21300000, guid: d5b8393f09eb6470e905ec740629c4a9, type: 3}
+  - {fileID: 21300000, guid: f2c06d80ab9bd4de2ae0a7876f25299d, type: 3}
+  - {fileID: 21300000, guid: 29511ee6c48ef4fe7ad496aba8b4036e, type: 3}
+  _isTheFirstLine: 1
 --- !u!114 &684978850 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3560757933976374743, guid: d62e0bff0eb833e42aef7617544cf64e,
@@ -534,12 +571,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &891689739 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8745416702522318190, guid: d62e0bff0eb833e42aef7617544cf64e,
-    type: 3}
-  m_PrefabInstance: {fileID: 8745416702742382181}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &899202106 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7146549540032420376, guid: d62e0bff0eb833e42aef7617544cf64e,
@@ -684,80 +715,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1624816861
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1624816863}
-  - component: {fileID: 1624816862}
-  m_Layer: 0
-  m_Name: ArrowCreator
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1624816862
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1624816861}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9d9c696269bd5543b58eb5b5890b5ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _currentListOfArrows: 
-  _nextListOfArrows: 
-  _currentArrow: 0
-  _currentLevel: 0
-  _nextLevel: 0
-  _arrowsToCreate: 0
-  _lineOfArrowsImagesCurrent:
-  - {fileID: 410575999}
-  - {fileID: 60917087}
-  - {fileID: 1201956007}
-  - {fileID: 458624391}
-  - {fileID: 1931287546}
-  - {fileID: 1073780791}
-  - {fileID: 764294161}
-  _lineOfArrowsImagesNext:
-  - {fileID: 2146184936}
-  - {fileID: 899202106}
-  - {fileID: 1402326088}
-  - {fileID: 2065681664}
-  - {fileID: 1476970386}
-  - {fileID: 870969565}
-  - {fileID: 457077692}
-  _arrowSprites:
-  - {fileID: 21300000, guid: 067be74ecf0444595a2a4825969316ba, type: 3}
-  - {fileID: 21300000, guid: d5b8393f09eb6470e905ec740629c4a9, type: 3}
-  - {fileID: 21300000, guid: f2c06d80ab9bd4de2ae0a7876f25299d, type: 3}
-  - {fileID: 21300000, guid: 29511ee6c48ef4fe7ad496aba8b4036e, type: 3}
-  _isTheFirstLine: 1
-  _currentArrowsPanel: {fileID: 891689739}
-  _nextArrowsPanel: {fileID: 271086651}
---- !u!4 &1624816863
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1624816861}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1931287546 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7131333466558608385, guid: d62e0bff0eb833e42aef7617544cf64e,
