@@ -26,6 +26,7 @@ public class BeatChecker : MonoBehaviour
     [SerializeField] private double _currentSongPosition = 0;
     [SerializeField] private bool _isBeatStarted = false;
     [SerializeField] private double _lastBeatTimer = 0;
+    [SerializeField] private int _beatIndex = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -88,12 +89,15 @@ public class BeatChecker : MonoBehaviour
         if( (_currentTime - _lastBeatTimer) > (_secPerBeatScaled))
         {
             Debug.Log("record new beat");
-            _tempImage.color = Color.green;
+            if(_beatIndex == 4){
+                _tempImage.color = Color.green;}
+            else{
+                _tempImage.color = Color.yellow;}
+            _beatIndex ++;
+            if(_beatIndex > 4) {_beatIndex = 1;}
             _lastBeatTimer = Time.timeAsDouble;
             _graceTimer = Time.timeAsDouble + _hitGraceTimer;
         }
-
-
-
     }
+
 }
