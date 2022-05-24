@@ -4,17 +4,14 @@ using UnityEngine;
 using System;
 using UnityEngine.UI;
 
-
 public class BeatChecker : MonoBehaviour
 {
     [SerializeField] private Songs_SO _songs_SO = null;
-    [SerializeField] private AudioClip _audioClip = null;
     [SerializeField] private AudioSource _audioSource = null;
 
     [Header("Settings")]    
     [SerializeField] private float _beatsPerMin = 140;    
     [SerializeField] private Image _tempImage;
-    [SerializeField] private int _beatScale = 4;
     [SerializeField] private double _hitGraceTimer = 0.3f;
     [SerializeField] private float _first4thBeatTimer = 0;
 
@@ -32,12 +29,12 @@ public class BeatChecker : MonoBehaviour
     void Start()
     {    
 
-    }
+    } 
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.anyKey)
+        if(Input.GetKey(KeyCode.Return))
         {
             StartGame();
         }

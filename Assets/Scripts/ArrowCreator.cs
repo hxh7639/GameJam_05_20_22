@@ -16,12 +16,9 @@ public class ArrowCreator : MonoBehaviour
     [SerializeField] private List<Image> _lineOfArrowsImagesNext = new List<Image>();
     [SerializeField] private List<Sprite> _arrowSprites = new List<Sprite>();
     [SerializeField] private bool _isTheFirstLine = true;
-    [SerializeField] private GameObject _currentBeatsParent = null;
-    [SerializeField] private GameObject _nextBeatsParent = null;
-
-    //temp
-    // The time at which the animation started.
-    private float startTime;
+    [SerializeField] private GameObject _currentArrowsPanel = null;
+    [SerializeField] private GameObject _nextArrowsPanel = null;
+    
 
     private int _startLevelForOneArrow = 1;
     private int _startLevelForTwoArrows = 3;
@@ -40,11 +37,12 @@ public class ArrowCreator : MonoBehaviour
             GenerateNextLine();
             _currentLevel--;
             _isTheFirstLine = false;
-        }
-        
-        _currentListOfArrows = _nextListOfArrows;
-        UpdateCurrentLine();
-        GenerateNextLine();        
+        } else 
+        {
+            _currentListOfArrows = _nextListOfArrows;
+            UpdateCurrentLine();
+            GenerateNextLine();  
+        }       
 
     }
 
@@ -52,7 +50,7 @@ public class ArrowCreator : MonoBehaviour
     {
         if(Input.GetKeyUp(KeyCode.Space))
         {
-            CreateLine();
+            CreateLine();            
             _currentLevel++;
         }
     }
@@ -86,44 +84,62 @@ public class ArrowCreator : MonoBehaviour
         //disable the additional images
         foreach (Image image in _lineOfArrowsImagesCurrent)
         {
-            image.transform.parent.gameObject.SetActive(image.sprite == null ? false : true);
+            image.transform.parent.gameObject.SetActive(image.sprite == null ? false : true);  
+            if(_isTheFirstLine){return;}          
+            LeanTween.moveLocalY(image.transform.parent.gameObject, 250, 0);
+            LeanTween.moveLocalY(image.transform.parent.gameObject, 0, 0.1f);   
         }
 
-        /* _currentBeatsParent.transform.localPosition = new Vector3(-400, 250, 0);
-        _currentBeatsParent.transform. = 
-            Vector3.Slerp(_currentBeatsParent.transform.localPosition, new Vector3(-400, 1000, 0), (Time.time - startTime / 5f));
-     */
+        /* if(_isTheFirstLine){return;}
+
+        LeanTween.moveLocalY(_currentArrowsPanel, 250, 0);
+        LeanTween.moveLocalY(_currentArrowsPanel, 0, 0.1f);   */      
+
     }
 
     private void GenerateNextLine()
-    {        
+    {
         _nextListOfArrows.Clear();
-        NumberOfArrowsToCreateNextLine(_currentLevel+1);
+        NumberOfArrowsToCreateNextLine(_currentLevel + 1);
         while (_nextListOfArrows.Count < _arrowsToCreate)
         {
             _nextListOfArrows.Add((int)Random.Range(0, 3));
-        }        
+        }
 
-        for(int i = 0; i < _nextListOfArrows.Count; i++)
+        for (int i = 0; i < _nextListOfArrows.Count; i++)
         {
             _lineOfArrowsImagesNext[i].sprite = _arrowSprites[_nextListOfArrows[i]];
         }
 
+        UpdateNextLine();
+    }
+
+    private void UpdateNextLine()
+    {
         //clear out the previous sprites
         foreach (Image img in _lineOfArrowsImagesNext)
         {
             img.sprite = null;
         }
         //set available sprites
-        for(int i = 0; i < _nextListOfArrows.Count; i++)
+        for (int i = 0; i < _nextListOfArrows.Count; i++)
         {
             _lineOfArrowsImagesNext[i].sprite = _arrowSprites[_nextListOfArrows[i]];
         }
         //disable the additional images
-        foreach(Image image in _lineOfArrowsImagesNext)
+        foreach (Image image in _lineOfArrowsImagesNext)
         {
+            
             image.transform.parent.gameObject.SetActive(image.sprite == null ? false : true);
+            if(_isTheFirstLine){return;}
+            LeanTween.moveLocalY(image.transform.parent.gameObject, 1000, 0);
+            LeanTween.moveLocalY(image.transform.parent.gameObject, 0, Random.Range(.1f,.4f));
+
         }
+        if(!_isTheFirstLine){return;}
+        //LeanTween.moveLocalY(_nextArrowsPanel, 1000, 0);
+        //LeanTween.moveLocalY(_nextArrowsPanel, 250, 0.3f);
+        Debug.Log("this ran");
     }
 
     private void NumberOfArrowsToCreateNextLine(int currentLevel)
@@ -154,7 +170,6 @@ public class ArrowCreator : MonoBehaviour
     void Start()
     {
         CreateLine();
-        startTime = Time.time;
     }
 
 }
