@@ -16,6 +16,12 @@ public class ArrowCreator : MonoBehaviour
     [SerializeField] private List<Image> _lineOfArrowsImagesNext = new List<Image>();
     [SerializeField] private List<Sprite> _arrowSprites = new List<Sprite>();
     [SerializeField] private bool _isTheFirstLine = true;
+    [SerializeField] private GameObject _currentBeatsParent = null;
+    [SerializeField] private GameObject _nextBeatsParent = null;
+
+    //temp
+    // The time at which the animation started.
+    private float startTime;
 
     private int _startLevelForOneArrow = 1;
     private int _startLevelForTwoArrows = 3;
@@ -33,11 +39,22 @@ public class ArrowCreator : MonoBehaviour
             _currentLevel++;      
             GenerateNextLine();
             _currentLevel--;
+            _isTheFirstLine = false;
         }
         
         _currentListOfArrows = _nextListOfArrows;
+        UpdateCurrentLine();
         GenerateNextLine();        
 
+    }
+
+    void Update()
+    {
+        if(Input.GetKeyUp(KeyCode.Space))
+        {
+            CreateLine();
+            _currentLevel++;
+        }
     }
 
 
@@ -50,23 +67,32 @@ public class ArrowCreator : MonoBehaviour
             _currentListOfArrows.Add((int)Random.Range(0, 3));
         }
 
+        UpdateCurrentLine();
+
+    }
+
+    private void UpdateCurrentLine()
+    {
         //clear out the previous sprites
         foreach (Image img in _lineOfArrowsImagesCurrent)
         {
             img.sprite = null;
         }
         //set available sprites
-        for(int i = 0; i < _currentListOfArrows.Count; i++)
+        for (int i = 0; i < _currentListOfArrows.Count; i++)
         {
             _lineOfArrowsImagesCurrent[i].sprite = _arrowSprites[_currentListOfArrows[i]];
         }
         //disable the additional images
-        foreach(Image image in _lineOfArrowsImagesCurrent)
+        foreach (Image image in _lineOfArrowsImagesCurrent)
         {
             image.transform.parent.gameObject.SetActive(image.sprite == null ? false : true);
         }
-    
 
+        /* _currentBeatsParent.transform.localPosition = new Vector3(-400, 250, 0);
+        _currentBeatsParent.transform. = 
+            Vector3.Slerp(_currentBeatsParent.transform.localPosition, new Vector3(-400, 1000, 0), (Time.time - startTime / 5f));
+     */
     }
 
     private void GenerateNextLine()
@@ -128,6 +154,7 @@ public class ArrowCreator : MonoBehaviour
     void Start()
     {
         CreateLine();
+        startTime = Time.time;
     }
 
 }
