@@ -16,6 +16,6 @@ MonoBehaviour:
   _beatsPerMin: 95
   _firstBeatTimer: 0.77
   _first4thBeatTimer: 2.6647367
-  _beatScale: 4
-  _secPerBeatScaled: 2.5263157
+  _beatScale: 1
+  _secPerBeatScaled: 0.6315789
   _secPerBeat: 0.6315789

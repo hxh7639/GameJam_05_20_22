@@ -8,6 +8,7 @@ public class BeatChecker : MonoBehaviour
 {
     [SerializeField] private Songs_SO _songs_SO = null;
     [SerializeField] private AudioSource _audioSource = null;
+    [SerializeField] private ArrowCreator _arrowCreator = null;
 
     [Header("Settings")]    
     [SerializeField] private float _beatsPerMin = 140;    
@@ -24,14 +25,9 @@ public class BeatChecker : MonoBehaviour
     [SerializeField] private bool _isBeatStarted = false;
     [SerializeField] private double _lastBeatTimer = 0;
     [SerializeField] private int _beatIndex = 0;
-
-    [SerializeField] private List<int> _currentListOfArrows;
-
+    
     //public
-    public void UpdateCurrentArrows(List<int> list)
-    {
-        _currentListOfArrows = list;
-    }
+    public double _nextBeatCheckTimer = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -92,12 +88,18 @@ public class BeatChecker : MonoBehaviour
 
 
         if( (_currentTime - _lastBeatTimer) > (_secPerBeatScaled))
-        {
-            Debug.Log("record new beat");
+        {            
             if(_beatIndex == 4){
-                _tempImage.color = Color.green;}
+                _tempImage.color = Color.green;
+                }
             else{
                 _tempImage.color = Color.yellow;}
+            if(_beatIndex == 1){
+                //record the next beat checker
+                //_secPerBeatScaled not actually scaled since i am now using a scale of 1
+                _nextBeatCheckTimer = Time.timeAsDouble + (_secPerBeatScaled * 3);
+                LeanTween.scale(_arrowCreator._stampParentPanel, new Vector3(0,0,0), 0.5f);
+            }
             _beatIndex ++;
             if(_beatIndex > 4) {_beatIndex = 1;}
             _lastBeatTimer = Time.timeAsDouble;

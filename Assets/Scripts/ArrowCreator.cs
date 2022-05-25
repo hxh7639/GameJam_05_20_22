@@ -7,18 +7,25 @@ public class ArrowCreator : MonoBehaviour
 {
     [SerializeField] private BeatChecker _beatChecker;
     //0 up, 1 down, 2 left, 3 right
-    [SerializeField] private List<int> _currentListOfArrows;
+    public List<int> _currentListOfArrows;
     [SerializeField] private List<int> _nextListOfArrows;
-    [SerializeField] private int _currentArrow;
+    public int _currentArrowPos;
     [SerializeField] private int _currentLevel;
     [SerializeField] private int _nextLevel;
     [SerializeField] private int _arrowsToCreate;
-    [SerializeField] private List<Image> _lineOfArrowsImagesCurrent = new List<Image>();
+    public List<Image> _lineOfArrowsImagesCurrent = new List<Image>();
     [SerializeField] private List<Image> _lineOfArrowsImagesNext = new List<Image>();
     [SerializeField] private List<Sprite> _arrowSprites = new List<Sprite>();
     [SerializeField] private bool _isTheFirstLine = true;
-    //[SerializeField] private GameObject _currentArrowsPanel = null;
-    //[SerializeField] private GameObject _nextArrowsPanel = null;
+    [SerializeField] private float _beatCheckGraceTime = 0.1f;
+    [SerializeField] private float _perfectHitRange = 0.05f;
+    [Header("stamps")] 
+    public GameObject _stampParentPanel;
+    [SerializeField] private GameObject _hitBorder;
+    [SerializeField] private GameObject _missedBorder;
+    [SerializeField] private List<GameObject> _perfectStamps;
+    [SerializeField] private List<GameObject> _goodStamps;
+    [SerializeField] private List<GameObject> _badStamps;
     
 
     private int _startLevelForOneArrow = 1;
@@ -33,7 +40,6 @@ public class ArrowCreator : MonoBehaviour
         {
             NumberOfArrowsToCreateNextLine(_currentLevel);
             GenerateCurrentLine();    
-            _beatChecker.UpdateCurrentArrows(_currentListOfArrows);  
 
             _currentLevel++;      
             GenerateNextLine();
@@ -43,17 +49,70 @@ public class ArrowCreator : MonoBehaviour
         } 
         //have to clone it, otherwise it will continue to reference the list when updated
         _currentListOfArrows = new List<int> (_nextListOfArrows);   
-        _beatChecker.UpdateCurrentArrows(_currentListOfArrows);
         UpdateCurrentLine();
         GenerateNextLine();      
     }
 
     void Update()
     {
-        if(Input.GetKeyUp(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.Space))
         {
-            CreateLine();            
+            //check if arrows have been cleared (hit correctly)
+            //if all clear
+            if(_currentArrowPos >= _currentListOfArrows.Count)
+            {
+                CheckBeatTimer();
+
+            }
+            else 
+            {
+                Debug.Log("not all arrows are cleared"); 
+                HandleNotAllArrowsAreCleared();
+            }
+            
+            //reset current line
+            foreach (Image img in _lineOfArrowsImagesCurrent)
+                {
+                    img.color = Color.white;
+                }
+            _currentArrowPos = 0;
+
+        }
+    }
+
+    private void CheckBeatTimer()
+    {
+        //check if space was hit on time
+        if ((_beatChecker._nextBeatCheckTimer - Time.timeAsDouble) < 0 &&
+            (_beatChecker._nextBeatCheckTimer - Time.timeAsDouble) > -_beatCheckGraceTime
+            ||
+            (_beatChecker._nextBeatCheckTimer - Time.timeAsDouble) > 0 &&
+            (_beatChecker._nextBeatCheckTimer - Time.timeAsDouble) < _beatCheckGraceTime)
+
+        {                   
+            //Debug.Log("all clear, next level, timer difference: " + (_beatChecker._nextBeatCheckTimer - Time.timeAsDouble) );
+            float tempFloat = (float)(_beatChecker._nextBeatCheckTimer - Time.timeAsDouble);
+            //test for perfect or good     
+            if(Mathf.Abs(tempFloat) < _perfectHitRange)
+            {
+                Debug.Log("perfect hit");
+                HandlePerfectHit();
+            } else
+            {
+                Debug.Log("good hit");
+                HandleGoodHit();
+            }
+
+
+            //next line/level
+            CreateLine();
             _currentLevel++;
+        }
+        else
+        {
+            //missing the beat
+            HandleMissingBeat();
+
         }
     }
 
@@ -162,6 +221,60 @@ public class ArrowCreator : MonoBehaviour
             _arrowsToCreate = 7;
         }
     }
+
+    private void ResetStamps()
+    {
+        _stampParentPanel.transform.localRotation = Quaternion.identity;
+        _stampParentPanel.transform.localScale = new Vector3(1,1,1);
+        _hitBorder.SetActive(false);
+        _missedBorder.SetActive(false);
+        foreach (GameObject stamp in _perfectStamps)
+        {
+            stamp.SetActive(false);
+        }
+        foreach (GameObject stamp in _goodStamps)
+        {
+            stamp.SetActive(false);
+        }
+        foreach (GameObject stamp in _badStamps)
+        {
+            stamp.SetActive(false);
+        }
+    }
+
+    private void HandleMissingBeat()
+    {
+        ResetStamps();
+        LeanTween.rotateLocal(_stampParentPanel, new Vector3 (0,0,Random.Range(-45,45)), 0f);
+        _missedBorder.SetActive(true);
+        _badStamps[Random.Range(0,_badStamps.Count)].SetActive(true);        
+    }
+
+    private void HandlePerfectHit()
+    {
+        ResetStamps();
+        LeanTween.rotateLocal(_stampParentPanel, new Vector3 (0,0,Random.Range(-45,45)), 0f);
+        _hitBorder.SetActive(true);
+        _perfectStamps[Random.Range(0,_perfectStamps.Count)].SetActive(true);   
+    }
+
+    private void HandleGoodHit()
+    {
+        ResetStamps();
+        LeanTween.rotateLocal(_stampParentPanel, new Vector3 (0,0,Random.Range(-45,45)), 0f);
+        _hitBorder.SetActive(true);
+        _goodStamps[Random.Range(0,_goodStamps.Count)].SetActive(true);   
+    }
+
+    private void HandleNotAllArrowsAreCleared()
+    {
+        foreach (Image img in _lineOfArrowsImagesCurrent)
+        {
+            LeanTween.rotateLocal(img.transform.parent.gameObject,new Vector3(Random.Range(-90,90),Random.Range(-90,90),Random.Range(-90,90)),0f);
+            LeanTween.rotateLocal(img.transform.parent.gameObject,new Vector3(0,0,0), .3f);
+        }
+    }
+
 
     void Start()
     {
