@@ -19,9 +19,13 @@ public class ArrowCreator : MonoBehaviour
     [SerializeField] private bool _isTheFirstLine = true;
     [SerializeField] private float _beatCheckGraceTime = 0.1f;
     [SerializeField] private float _perfectHitRange = 0.05f;
+    public bool _isTimeUpForCurrentBeat = false;
+    public bool _isInPutEnabled = false;
+
     [Header("stamps")] 
     public GameObject _stampParentPanel;
-    [SerializeField] private GameObject _hitBorder;
+    [SerializeField] private GameObject _perfectBorder;
+    [SerializeField] private GameObject _goodBorder;
     [SerializeField] private GameObject _missedBorder;
     [SerializeField] private List<GameObject> _perfectStamps;
     [SerializeField] private List<GameObject> _goodStamps;
@@ -55,51 +59,74 @@ public class ArrowCreator : MonoBehaviour
 
     void Update()
     {
+        if(!_isInPutEnabled)
+        {
+            return;
+        }
+
         if(Input.GetKeyDown(KeyCode.Space))
         {
+            
             //check if arrows have been cleared (hit correctly)
             //if all clear
-            if(_currentArrowPos >= _currentListOfArrows.Count)
+            if (_currentArrowPos >= _currentListOfArrows.Count)
             {
                 CheckBeatTimer();
 
             }
-            else 
+            else
             {
-                Debug.Log("not all arrows are cleared"); 
+                Debug.Log("not all arrows are cleared");
                 HandleNotAllArrowsAreCleared();
             }
-            
-            //reset current line
-            foreach (Image img in _lineOfArrowsImagesCurrent)
-                {
-                    img.color = Color.white;
-                }
-            _currentArrowPos = 0;
 
+            ResetCurrentLine();
+            _isTimeUpForCurrentBeat = false;          
         }
+
+        if(!_isTimeUpForCurrentBeat)
+        { return;}
+        
+        if(_beatChecker._nextBeatCheckTimer + _beatCheckGraceTime + 0.05 < Time.timeAsDouble)
+        {
+            if(_currentArrowPos > 0) // do not need to reset if player didn't even start
+            {
+                HandleNotAllArrowsAreCleared();
+                ResetCurrentLine();
+                _isTimeUpForCurrentBeat = false;
+            }            
+        }
+
+        //TODO handle line not finished but did not click space key 
     }
+
+    
 
     private void CheckBeatTimer()
     {
         //check if space was hit on time
-        if ((_beatChecker._nextBeatCheckTimer - Time.timeAsDouble) < 0 &&
-            (_beatChecker._nextBeatCheckTimer - Time.timeAsDouble) > -_beatCheckGraceTime
+        //hit before the Check Timer
+        if ((Time.timeAsDouble - _beatChecker._nextBeatCheckTimer) < 0 &&
+            (Time.timeAsDouble - _beatChecker._nextBeatCheckTimer) > -_beatCheckGraceTime
             ||
-            (_beatChecker._nextBeatCheckTimer - Time.timeAsDouble) > 0 &&
-            (_beatChecker._nextBeatCheckTimer - Time.timeAsDouble) < _beatCheckGraceTime)
+            //(hit after the check timer)
+            (Time.timeAsDouble - _beatChecker._nextBeatCheckTimer) > 0 &&
+            (Time.timeAsDouble - _beatChecker._nextBeatCheckTimer) < _beatCheckGraceTime)
 
-        {                   
-            //Debug.Log("all clear, next level, timer difference: " + (_beatChecker._nextBeatCheckTimer - Time.timeAsDouble) );
+        {         
+            if((Time.timeAsDouble - _beatChecker._nextBeatCheckTimer) < 0)    
+            {
+                //let beat checker know so it doesn't change _isTimeUpForCurrentBeat status
+                //its a hit but it is before the beat
+                _beatChecker._isSpacePressedBeforeForthBeat = true;
+            }  
             float tempFloat = (float)(_beatChecker._nextBeatCheckTimer - Time.timeAsDouble);
             //test for perfect or good     
             if(Mathf.Abs(tempFloat) < _perfectHitRange)
             {
-                Debug.Log("perfect hit");
                 HandlePerfectHit();
             } else
             {
-                Debug.Log("good hit");
                 HandleGoodHit();
             }
 
@@ -226,7 +253,8 @@ public class ArrowCreator : MonoBehaviour
     {
         _stampParentPanel.transform.localRotation = Quaternion.identity;
         _stampParentPanel.transform.localScale = new Vector3(1,1,1);
-        _hitBorder.SetActive(false);
+        _perfectBorder.SetActive(false);
+        _goodBorder.SetActive(false);
         _missedBorder.SetActive(false);
         foreach (GameObject stamp in _perfectStamps)
         {
@@ -254,7 +282,7 @@ public class ArrowCreator : MonoBehaviour
     {
         ResetStamps();
         LeanTween.rotateLocal(_stampParentPanel, new Vector3 (0,0,Random.Range(-45,45)), 0f);
-        _hitBorder.SetActive(true);
+        _perfectBorder.SetActive(true);
         _perfectStamps[Random.Range(0,_perfectStamps.Count)].SetActive(true);   
     }
 
@@ -262,17 +290,27 @@ public class ArrowCreator : MonoBehaviour
     {
         ResetStamps();
         LeanTween.rotateLocal(_stampParentPanel, new Vector3 (0,0,Random.Range(-45,45)), 0f);
-        _hitBorder.SetActive(true);
+        _goodBorder.SetActive(true);
         _goodStamps[Random.Range(0,_goodStamps.Count)].SetActive(true);   
     }
 
-    private void HandleNotAllArrowsAreCleared()
+    public void HandleNotAllArrowsAreCleared()
     {
         foreach (Image img in _lineOfArrowsImagesCurrent)
         {
             LeanTween.rotateLocal(img.transform.parent.gameObject,new Vector3(Random.Range(-90,90),Random.Range(-90,90),Random.Range(-90,90)),0f);
             LeanTween.rotateLocal(img.transform.parent.gameObject,new Vector3(0,0,0), .3f);
         }
+    }
+
+    public void ResetCurrentLine()
+    {
+        //reset current line
+        foreach (Image img in _lineOfArrowsImagesCurrent)
+        {
+            img.color = Color.white;
+        }
+        _currentArrowPos = 0;
     }
 
 

@@ -6,15 +6,21 @@ using UnityEngine.UI;
 public class ArrowChecker : MonoBehaviour
 {
     [SerializeField] private ArrowCreator _arrowCreator = null;
+    public bool _isInPutEnabled = false;
 
     //0 up, 1 down, 2 left, 3 right
     void Update()
     {
+        if(!_isInPutEnabled)
+        {
+            return;
+        }
+
+
         if(Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
         {
             if(_arrowCreator._currentListOfArrows[_arrowCreator._currentArrowPos] == 0)
             {
-                Debug.Log("up hit correctly");
                 _arrowCreator._lineOfArrowsImagesCurrent[_arrowCreator._currentArrowPos].color = Color.green;
                 _arrowCreator._currentArrowPos++;
             } else
@@ -43,7 +49,6 @@ public class ArrowChecker : MonoBehaviour
         {
             if(_arrowCreator._currentListOfArrows[_arrowCreator._currentArrowPos] == 1)
             {
-                Debug.Log("down hit correctly");
                 _arrowCreator._lineOfArrowsImagesCurrent[_arrowCreator._currentArrowPos].color = Color.green;
                 _arrowCreator._currentArrowPos++;
             } else
@@ -72,7 +77,6 @@ public class ArrowChecker : MonoBehaviour
         {
             if(_arrowCreator._currentListOfArrows[_arrowCreator._currentArrowPos] == 2)
             {
-                Debug.Log("Left hit correctly");
                 _arrowCreator._lineOfArrowsImagesCurrent[_arrowCreator._currentArrowPos].color = Color.green;
                 _arrowCreator._currentArrowPos++;
             } else
@@ -101,7 +105,6 @@ public class ArrowChecker : MonoBehaviour
         {
             if(_arrowCreator._currentListOfArrows[_arrowCreator._currentArrowPos] == 3)
             {
-                Debug.Log("Right hit correctly");
                 _arrowCreator._lineOfArrowsImagesCurrent[_arrowCreator._currentArrowPos].color = Color.green;
                 _arrowCreator._currentArrowPos++;
             } else
