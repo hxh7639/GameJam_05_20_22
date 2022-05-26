@@ -22,6 +22,9 @@ public class ArrowCreator : MonoBehaviour
     public bool _isTimeUpForCurrentBeat = false;
     public bool _isInPutEnabled = false;
 
+    [Header("Hammer")] 
+    [SerializeField] GameObject _hammer = null;
+
     [Header("stamps")] 
     public GameObject _stampParentPanel;
     [SerializeField] private GameObject _perfectBorder;
@@ -64,8 +67,13 @@ public class ArrowCreator : MonoBehaviour
             return;
         }
 
+        //reset hammer
+        //LeanTween.rotateLocal(_hammer, new Vector3(0,-10, 0), 0f);
+
         if(Input.GetKeyDown(KeyCode.Space))
         {
+            LeanTween.rotateLocal(_hammer, new Vector3(70,-10, 0), 0f);
+            LeanTween.rotateLocal(_hammer, new Vector3(0,-10, 0), 0.5f);
             
             //check if arrows have been cleared (hit correctly)
             //if all clear
@@ -97,7 +105,7 @@ public class ArrowCreator : MonoBehaviour
             }            
         }
 
-        //TODO handle line not finished but did not click space key 
+        
     }
 
     

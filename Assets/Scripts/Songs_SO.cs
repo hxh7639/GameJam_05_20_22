@@ -10,7 +10,7 @@ public class Songs_SO : ScriptableObject
     public float _firstBeatTimer = 0;  
     [Header("auto")] 
     public float _first4thBeatTimer = 0;
-    public int _beatScale = 4;
+    public int _beatScale = 1;
     public float _secPerBeatScaled;
     public float _secPerBeat = 0;
 

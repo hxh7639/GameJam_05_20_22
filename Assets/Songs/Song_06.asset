@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef7e2e69f9efa6c4c9979161cba7e34d, type: 3}
+  m_Name: Song_06
+  m_EditorClassIdentifier: 
+  _audioClip: {fileID: 8300000, guid: 993c5535241e03a4da6c6060b3d10367, type: 3}
+  _beatsPerMin: 115
+  _firstBeatTimer: 0.05
+  _first4thBeatTimer: 1.6152173
+  _beatScale: 1
+  _secPerBeatScaled: 0.5217391
+  _secPerBeat: 0.5217391
