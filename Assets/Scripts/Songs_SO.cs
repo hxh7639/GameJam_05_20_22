@@ -8,6 +8,16 @@ public class Songs_SO : ScriptableObject
     public AudioClip _audioClip = null;
     public float _beatsPerMin = 100;  
     public float _firstBeatTimer = 0;  
+
+    [Header("Beat Correction")] 
+    [Tooltip("if true, you need to fill out the rest")]
+    public bool _isCorrectionNeeded = false;
+    public float _timeSlightlyAfterCorrectionBeat = 0;
+    public float _timeOfNextBeat = 0;
+    public float _timeOfCorrectionBeat = 0;
+
+
+
     [Header("auto")] 
     public float _first4thBeatTimer = 0;
     public int _beatScale = 1;

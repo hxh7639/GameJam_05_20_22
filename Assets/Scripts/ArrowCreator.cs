@@ -95,7 +95,7 @@ public class ArrowCreator : MonoBehaviour
         if(!_isTimeUpForCurrentBeat)
         { return;}
         
-        if(_beatChecker._nextBeatCheckTimer + _beatCheckGraceTime + 0.05 < Time.timeAsDouble)
+        if(_beatChecker._nextBeatCheckTimer + _beatCheckGraceTime + 0.01 < Time.timeAsDouble)
         {
             if(_currentArrowPos > 0) // do not need to reset if player didn't even start
             {

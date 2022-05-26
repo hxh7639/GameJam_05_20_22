@@ -261,7 +261,7 @@ PlayableDirector:
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
   m_SceneBindings:
-  - key: {fileID: 1375700749494591743, guid: 44cc3d144513e834182be1a47eaab8d9, type: 2}
+  - key: {fileID: -3747362090558518425, guid: 44cc3d144513e834182be1a47eaab8d9, type: 2}
     value: {fileID: 0}
   m_ExposedReferences:
     m_References: []
@@ -1133,7 +1133,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _songs_SO
       value: 
-      objectReference: {fileID: 11400000, guid: 79f3577d0b8ad264392b25b221fc1524,
+      objectReference: {fileID: 11400000, guid: abcdc778e8c6b49458340c01ecc7becc,
         type: 2}
     - target: {fileID: 2082799196285431370, guid: 3b55f1f0c133fc344b26341e8b9dd279,
         type: 3}

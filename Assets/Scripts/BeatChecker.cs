@@ -24,6 +24,13 @@ public class BeatChecker : MonoBehaviour
     [SerializeField] private TMP_Text _startText;
     [SerializeField] private bool _isInPutEnabled = false;
                      private float _gameStartTimer = 0;
+    [Header("Beat Correction")]
+    [SerializeField] private bool _isCorrectionNeeded = false;   
+    [SerializeField] private bool _isBeatCorrected = false;  
+    [SerializeField] private float _timeSlightlyAfterCorrectionBeat;
+    [SerializeField] private float _timeOfNextBeat;
+    [SerializeField] private float _timeOfCorrectionBeat;
+                
 
     [Header("info only")] 
     [SerializeField] private float _secPerBeatScaled = 0;
@@ -77,6 +84,12 @@ public class BeatChecker : MonoBehaviour
         _first4thBeatTimer = _songs_SO._first4thBeatTimer;
 
         _secPerBeatScaled = _songs_SO._secPerBeatScaled;
+        _isCorrectionNeeded = _songs_SO._isCorrectionNeeded;
+        _timeSlightlyAfterCorrectionBeat = _songs_SO._timeSlightlyAfterCorrectionBeat;
+        _timeOfNextBeat = _songs_SO._timeOfNextBeat;
+        _timeOfCorrectionBeat = _songs_SO._timeOfCorrectionBeat;
+
+
 
         _audioSource.Play();
         _songStartedTime = Time.timeAsDouble;
@@ -87,6 +100,14 @@ public class BeatChecker : MonoBehaviour
         _currentTime = Time.timeAsDouble;
 
         _currentSongPosition = _currentTime - _songStartedTime;
+
+        //beat correction
+        if(_isCorrectionNeeded && !_isBeatCorrected && 
+        _currentSongPosition > _timeSlightlyAfterCorrectionBeat  && _currentSongPosition < _timeOfNextBeat)
+        {
+            _lastBeatTimer = _timeOfCorrectionBeat;
+            _isBeatCorrected = true;
+        }
 
         if (!_isBeatStarted && (_first4thBeatTimer) <= _currentSongPosition)
         {
