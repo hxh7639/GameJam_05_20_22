@@ -84,10 +84,10 @@ public class BeatChecker : MonoBehaviour
         _first4thBeatTimer = _songs_SO._first4thBeatTimer;
 
         _secPerBeatScaled = _songs_SO._secPerBeatScaled;
-        _isCorrectionNeeded = _songs_SO._isCorrectionNeeded;
+        /* _isCorrectionNeeded = _songs_SO._isCorrectionNeeded;
         _timeSlightlyAfterCorrectionBeat = _songs_SO._timeSlightlyAfterCorrectionBeat;
         _timeOfNextBeat = _songs_SO._timeOfNextBeat;
-        _timeOfCorrectionBeat = _songs_SO._timeOfCorrectionBeat;
+        _timeOfCorrectionBeat = _songs_SO._timeOfCorrectionBeat; */
 
 
 

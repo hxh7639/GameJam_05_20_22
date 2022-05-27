@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ArrowCreator : MonoBehaviour
 {
     [SerializeField] private BeatChecker _beatChecker;
+    [SerializeField] private PersistGameManager _persistGameManager;
     //0 up, 1 down, 2 left, 3 right
     public List<int> _currentListOfArrows;
     [SerializeField] private List<int> _nextListOfArrows;
@@ -21,6 +23,8 @@ public class ArrowCreator : MonoBehaviour
     [SerializeField] private float _perfectHitRange = 0.05f;
     public bool _isTimeUpForCurrentBeat = false;
     public bool _isInPutEnabled = false;
+    public TMP_Text _comboText;
+    public TMP_Text _scoreText;
 
     [Header("Hammer")] 
     [SerializeField] GameObject _hammer = null;
@@ -40,6 +44,12 @@ public class ArrowCreator : MonoBehaviour
     private int _startLevelForThreeArrows = 5;
     private int _startLevelForFiveArrows = 9;
     private int _startLevelForSevenArrows = 17;
+
+    void Awake()
+    {
+        _persistGameManager = FindObjectOfType<PersistGameManager>();
+        
+    }
 
     public void CreateLine()
     {       
@@ -67,8 +77,6 @@ public class ArrowCreator : MonoBehaviour
             return;
         }
 
-        //reset hammer
-        //LeanTween.rotateLocal(_hammer, new Vector3(0,-10, 0), 0f);
 
         if(Input.GetKeyDown(KeyCode.Space))
         {
@@ -86,9 +94,13 @@ public class ArrowCreator : MonoBehaviour
             {
                 Debug.Log("not all arrows are cleared");
                 HandleNotAllArrowsAreCleared();
+                if(_persistGameManager != null)
+                {
+                    _persistGameManager.ResetCombo();
+                }
             }
 
-            ResetCurrentLine();
+            ResetCurrentLine();            
             _isTimeUpForCurrentBeat = false;          
         }
 
@@ -100,9 +112,18 @@ public class ArrowCreator : MonoBehaviour
             if(_currentArrowPos > 0) // do not need to reset if player didn't even start
             {
                 HandleNotAllArrowsAreCleared();
+                if(_persistGameManager != null)
+                {
+                    _persistGameManager.ResetCombo();
+                }
                 ResetCurrentLine();
                 _isTimeUpForCurrentBeat = false;
-            }            
+            }     
+            
+            if(_persistGameManager != null)
+            {
+                _persistGameManager.ResetCombo();
+            }     
         }
 
         
@@ -141,13 +162,21 @@ public class ArrowCreator : MonoBehaviour
 
             //next line/level
             CreateLine();
-            _currentLevel++;
+            if(_persistGameManager != null)
+            {
+                _persistGameManager.AddCombo();
+            }
+            _currentLevel++;           
+
         }
         else
         {
             //missing the beat
             HandleMissingBeat();
-
+            if(_persistGameManager != null)
+            {
+                _persistGameManager.ResetCombo();
+            }
         }
     }
 
@@ -292,6 +321,11 @@ public class ArrowCreator : MonoBehaviour
         LeanTween.rotateLocal(_stampParentPanel, new Vector3 (0,0,Random.Range(-45,45)), 0f);
         _perfectBorder.SetActive(true);
         _perfectStamps[Random.Range(0,_perfectStamps.Count)].SetActive(true);   
+        //add score
+        if(_persistGameManager != null)
+        {
+            _persistGameManager.AddScore(true);
+        }
     }
 
     private void HandleGoodHit()
@@ -300,6 +334,11 @@ public class ArrowCreator : MonoBehaviour
         LeanTween.rotateLocal(_stampParentPanel, new Vector3 (0,0,Random.Range(-45,45)), 0f);
         _goodBorder.SetActive(true);
         _goodStamps[Random.Range(0,_goodStamps.Count)].SetActive(true);   
+        //add score
+        if(_persistGameManager != null)
+        {
+            _persistGameManager.AddScore(false);
+        }
     }
 
     public void HandleNotAllArrowsAreCleared()
@@ -324,6 +363,14 @@ public class ArrowCreator : MonoBehaviour
 
     void Start()
     {
+        //reset stage score
+        if(_persistGameManager != null)
+        {
+            _persistGameManager.RegisterComboText(_comboText);
+            _persistGameManager.RegisterScoreText(_scoreText);
+            _persistGameManager.ResetScore();
+            _persistGameManager.ResetCombo();
+        }        
         CreateLine();
     }
 

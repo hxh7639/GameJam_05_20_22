@@ -16,7 +16,7 @@ public class MainMenu : MonoBehaviour
 
     void Awake()
     {
-        Application.targetFrameRate = 60;
+        Application.targetFrameRate = 450;
     }
 
     // Start is called before the first frame update
