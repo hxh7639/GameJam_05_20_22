@@ -1133,7 +1133,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _songs_SO
       value: 
-      objectReference: {fileID: 11400000, guid: abcdc778e8c6b49458340c01ecc7becc,
+      objectReference: {fileID: 11400000, guid: b8aacb75802c66649b62923e26bd74d4,
         type: 2}
     - target: {fileID: 2082799196285431370, guid: 3b55f1f0c133fc344b26341e8b9dd279,
         type: 3}
@@ -1150,6 +1150,11 @@ PrefabInstance:
       propertyPath: _startTextPanel
       value: 
       objectReference: {fileID: 612554161}
+    - target: {fileID: 2082799196285431370, guid: 3b55f1f0c133fc344b26341e8b9dd279,
+        type: 3}
+      propertyPath: _gameStartAfterSeconds
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2082799196285431372, guid: 3b55f1f0c133fc344b26341e8b9dd279,
         type: 3}
       propertyPath: m_Name

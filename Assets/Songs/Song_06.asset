@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Song_06
   m_EditorClassIdentifier: 
   _audioClip: {fileID: 8300000, guid: 993c5535241e03a4da6c6060b3d10367, type: 3}
-  _beatsPerMin: 115
+  _beatsPerMin: 115.15
   _firstBeatTimer: 0.05
-  _isCorrectionNeeded: 1
+  _isCorrectionNeeded: 0
   _timeSlightlyAfterCorrectionBeat: 54.4
   _timeOfNextBeat: 54.8
   _timeOfCorrectionBeat: 54.3
-  _first4thBeatTimer: 1.6152173
+  _first4thBeatTimer: 1.6131784
   _beatScale: 1
-  _secPerBeatScaled: 0.5217391
-  _secPerBeat: 0.5217391
+  _secPerBeatScaled: 0.52105945
+  _secPerBeat: 0.52105945
