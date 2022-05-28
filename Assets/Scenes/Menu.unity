@@ -161,6 +161,12 @@ RectTransform:
   m_AnchoredPosition: {x: -395, y: 360}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &59589151 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4990481375665638134, guid: d078d1ed9a9442948ae9a54c98029939,
+    type: 3}
+  m_PrefabInstance: {fileID: 4990481374791532234}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &70149123
 GameObject:
   m_ObjectHideFlags: 0
@@ -736,6 +742,7 @@ GameObject:
   - component: {fileID: 298872488}
   - component: {fileID: 298872487}
   - component: {fileID: 298872491}
+  - component: {fileID: 298872492}
   m_Layer: 5
   m_Name: Main Menu canvas
   m_TagString: Untagged
@@ -850,6 +857,19 @@ MonoBehaviour:
   _creditsPanel: {fileID: 412203275}
   _menuSoundManager: {fileID: 1491201670}
   _persistGameManager: {fileID: 1311789664}
+--- !u!114 &298872492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 298872486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 716091e401d38ef40a91dbe8546db5c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _screenOverlay: {fileID: 59589151}
 --- !u!1 &314531109
 GameObject:
   m_ObjectHideFlags: 0

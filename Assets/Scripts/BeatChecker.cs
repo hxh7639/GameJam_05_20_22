@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class BeatChecker : MonoBehaviour
 {
@@ -13,18 +14,25 @@ public class BeatChecker : MonoBehaviour
     [SerializeField] private ArrowChecker _arrowChecker = null;
     [SerializeField] private PersistGameManager _persistGameManager = null;
 
+
     [Header("Settings")]    
     [SerializeField] private float _beatsPerMin = 140;    
     [SerializeField] private Image _tempImage;
     [SerializeField] private double _hitGraceTimer = 0.3f;
     [SerializeField] private float _first4thBeatTimer = 0;
     [SerializeField] private float _gameStartAfterSeconds = 0;
+    [SerializeField] private float _songLastBeatTimer;
+    [SerializeField] private float _endOfTheSongTime;
+    
 
     [Header("Other")]
     [SerializeField] private GameObject _startTextPanel;
     [SerializeField] private TMP_Text _startText;
     [SerializeField] private bool _isInPutEnabled = false;
                      private float _gameStartTimer = 0;
+    [SerializeField] private bool _isLoadingNextScene = false; 
+
+
     [Header("Beat Correction")]
     [SerializeField] private bool _isCorrectionNeeded = false;   
     [SerializeField] private bool _isBeatCorrected = false;  
@@ -58,8 +66,13 @@ public class BeatChecker : MonoBehaviour
     {    
         DisableInputs();
         _persistGameManager.FadeIn(1);
+        _isLoadingNextScene = false;
         
         _songs_SO = _persistGameManager._availableSongs[_persistGameManager._currentSongIndex];
+        _songLastBeatTimer = _songs_SO._songLastBeatTimer;
+        _endOfTheSongTime = _songs_SO._endOfTheSongTime;
+
+        
         _gameStartTimer = 0;
         _isMusicStarted = false;
     } 
@@ -80,7 +93,7 @@ public class BeatChecker : MonoBehaviour
         {
             StartGame();
         } */
-        if(!_audioSource.isPlaying){return;}
+        //if(!_audioSource.isPlaying){return;}
 
         TempCountBeat3();
 
@@ -106,9 +119,40 @@ public class BeatChecker : MonoBehaviour
 
     private void TempCountBeat3()
     {
+        if(_isLoadingNextScene){return;}
+
         _currentTime = Time.timeAsDouble;
 
         _currentSongPosition = _currentTime - _songStartedTime;
+
+        //end of song actions
+        if(_currentSongPosition > _endOfTheSongTime)
+        {
+            
+
+            _persistGameManager._currentSongIndex ++;
+            Debug.Log("_persistGameManager._currentSongIndex: " + _persistGameManager._currentSongIndex);
+            if(_persistGameManager._currentSongIndex <= 1)
+            {
+                Debug.Log("load StoryScene ");
+                _isLoadingNextScene = true;
+                LoadScene("StoryScene");
+                return;
+            }
+            if(_persistGameManager._currentSongIndex >= _persistGameManager._availableSongs.Count - 1)
+            {
+                Debug.Log("load Menu ");
+                _isLoadingNextScene = true;
+                LoadScene("Menu");
+            }else{
+                Debug.Log("load GameScene ");
+                _isLoadingNextScene = true;
+                LoadScene("GameScene");
+            }
+            
+
+        }
+        if(_currentSongPosition > _songLastBeatTimer){return;}
 
         //beat correction
         if(_isCorrectionNeeded && !_isBeatCorrected && 
@@ -120,7 +164,6 @@ public class BeatChecker : MonoBehaviour
 
         if (!_isBeatStarted && (_first4thBeatTimer) <= _currentSongPosition)
         {
-            Debug.Log("beat counted, 1st 4th beat");
             //_tempImage.color = Color.green;            
             _lastBeatTimer = Time.timeAsDouble;
             _graceTimer = Time.timeAsDouble + _hitGraceTimer;
@@ -227,6 +270,18 @@ public class BeatChecker : MonoBehaviour
         _arrowCreator._isInPutEnabled = true;
         _arrowChecker._isInPutEnabled = true;
         _isInPutEnabled = true;
+    }
+
+    public void LoadScene(string sceneName)
+    {
+        StartCoroutine(LoadSceneIE(sceneName));
+    }
+
+    public IEnumerator LoadSceneIE(string sceneName)
+    {        
+        _persistGameManager.FadeOut(2);
+        yield return new WaitForSeconds(2);
+        SceneManager.LoadScene(sceneName.ToString());
     }
 
 }

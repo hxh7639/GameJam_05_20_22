@@ -78,13 +78,11 @@ public class PersistGameManager : MonoBehaviour
     public void RegisterComboText(TMP_Text comboText)
     {
         _comboText = comboText;
-        Debug.Log("RegisterComboText");
     }
 
     public void RegisterScoreText(TMP_Text scoreText)
     {
         _ScoreText = scoreText;
-        Debug.Log("RegisterScoreText");
     }
 
     public void FadeOut(float time)

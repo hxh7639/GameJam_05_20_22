@@ -462,7 +462,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 891, y: -323}
+  m_AnchoredPosition: {x: 680, y: -397}
   m_SizeDelta: {x: 700, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &252540859
@@ -1428,7 +1428,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1052, y: 8}
+  m_AnchoredPosition: {x: 1052, y: -272}
   m_SizeDelta: {x: 1000, y: 1000}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1125089558
@@ -4236,7 +4236,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 6100dbbea50808c49a4609a101af2551, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5700,6 +5700,7 @@ GameObject:
   - component: {fileID: 8745416701425229342}
   - component: {fileID: 8745416701425229343}
   - component: {fileID: 8745416701425229340}
+  - component: {fileID: 8745416702742382186}
   m_Layer: 5
   m_Name: GameCanvas
   m_TagString: Untagged
@@ -5798,6 +5799,19 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &8745416702742382186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8745416701425229341}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 716091e401d38ef40a91dbe8546db5c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _screenOverlay: {fileID: 7136691201946921381}
 --- !u!1 &8745416701954114082
 GameObject:
   m_ObjectHideFlags: 0
@@ -6539,6 +6553,12 @@ PrefabInstance:
 --- !u!224 &7136691201946921380 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4990481375665638135, guid: d078d1ed9a9442948ae9a54c98029939,
+    type: 3}
+  m_PrefabInstance: {fileID: 2759403138350015315}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7136691201946921381 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4990481375665638134, guid: d078d1ed9a9442948ae9a54c98029939,
     type: 3}
   m_PrefabInstance: {fileID: 2759403138350015315}
   m_PrefabAsset: {fileID: 0}

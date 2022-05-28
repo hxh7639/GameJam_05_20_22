@@ -92,7 +92,6 @@ public class ArrowCreator : MonoBehaviour
             }
             else
             {
-                Debug.Log("not all arrows are cleared");
                 HandleNotAllArrowsAreCleared();
                 if(_persistGameManager != null)
                 {

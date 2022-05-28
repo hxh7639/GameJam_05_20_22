@@ -9,6 +9,7 @@ public class Songs_SO : ScriptableObject
     public float _beatsPerMin = 100;  
     public float _firstBeatTimer = 0;  
     public float _songLastBeatTimer = 0;
+    public float _endOfTheSongTime = 0;
 
     /* [Header("Beat Correction")] 
     [Tooltip("if true, you need to fill out the rest")]
