@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PersistGameManager : MonoBehaviour
 {
@@ -20,6 +22,22 @@ public class PersistGameManager : MonoBehaviour
     public int _pointPerCombo = 100;
     public int _pointPerPerfectHit = 250;
 
+    public Image _image;
+
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        _image = GameObject.FindGameObjectWithTag("ScreenOverlay").GetComponent<Image>();
+    }
 
     void Awake()
     {
@@ -67,6 +85,16 @@ public class PersistGameManager : MonoBehaviour
     {
         _ScoreText = scoreText;
         Debug.Log("RegisterScoreText");
+    }
+
+    public void FadeOut(float time)
+    {
+        _image.CrossFadeAlpha(1f, time, false);
+    }
+
+    public void FadeIn(float time)
+    {        
+        _image.CrossFadeAlpha(0, time, false);
     }
 
 

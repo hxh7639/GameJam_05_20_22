@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Song_08
   m_EditorClassIdentifier: 
   _audioClip: {fileID: 8300000, guid: 48023a89e8f0d9947b7b219f70af0627, type: 3}
-  _beatsPerMin: 75
+  _beatsPerMin: 75.1
   _firstBeatTimer: 1.6
-  _first4thBeatTimer: 4
+  _songLastBeatTimer: 0
+  _first4thBeatTimer: 3.9968042
   _beatScale: 1
-  _secPerBeatScaled: 0.8
-  _secPerBeat: 0.8
+  _secPerBeatScaled: 0.79893476
+  _secPerBeat: 0.79893476

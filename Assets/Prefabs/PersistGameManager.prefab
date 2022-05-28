@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6626529232348721851
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6626529232348721797}
+  - component: {fileID: 6626529232348721796}
+  m_Layer: 0
+  m_Name: PersistGameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6626529232348721797
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6626529232348721851}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 960, y: 459, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6626529232348721796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6626529232348721851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca00a5c28a910e747a819d575bb90537, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _availableSongs:
+  - {fileID: 11400000, guid: 9d09d0084b1305740b1db8e5a90e937f, type: 2}
+  - {fileID: 11400000, guid: 79f3577d0b8ad264392b25b221fc1524, type: 2}
+  - {fileID: 11400000, guid: 4f620ca9213f68d4385fd42fc3ca4b9f, type: 2}
+  - {fileID: 11400000, guid: b8aacb75802c66649b62923e26bd74d4, type: 2}
+  - {fileID: 11400000, guid: d2ef68df84c9b01488ce6708b367ff4f, type: 2}
+  - {fileID: 11400000, guid: 0121f39aac484d04b932084f85476763, type: 2}
+  - {fileID: 11400000, guid: abcdc778e8c6b49458340c01ecc7becc, type: 2}
+  - {fileID: 11400000, guid: 68c520e29d0e4c940a60124a234e749a, type: 2}
+  - {fileID: 11400000, guid: 9d09d0084b1305740b1db8e5a90e937f, type: 2}
+  _currentSongIndex: 0
+  _currentScore: 0
+  _combo: 0
+  _firstTimeHit: 1
+  _comboText: {fileID: 0}
+  _ScoreText: {fileID: 0}
+  _basePointPerClear: 500
+  _pointPerCombo: 100
+  _pointPerPerfectHit: 250
+  _image: {fileID: 0}

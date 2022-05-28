@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef7e2e69f9efa6c4c9979161cba7e34d, type: 3}
-  m_Name: Song_01
+  m_Name: Song_09
   m_EditorClassIdentifier: 
-  _audioClip: {fileID: 8300000, guid: 9b7af878884238d469087b1d1686abf4, type: 3}
-  _beatsPerMin: 82.15
-  _firstBeatTimer: 2.32
+  _audioClip: {fileID: 8300000, guid: 7405c0db1e5ac114f9a4d95be95748d0, type: 3}
+  _beatsPerMin: 100.1
+  _firstBeatTimer: 0.58
   _songLastBeatTimer: 0
-  _first4thBeatTimer: 4.5111136
+  _first4thBeatTimer: 2.3782017
   _beatScale: 1
-  _secPerBeatScaled: 0.73037124
-  _secPerBeat: 0.73037124
+  _secPerBeatScaled: 0.5994006
+  _secPerBeat: 0.5994006

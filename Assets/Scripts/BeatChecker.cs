@@ -11,6 +11,7 @@ public class BeatChecker : MonoBehaviour
     [SerializeField] private AudioSource _audioSource = null;
     [SerializeField] private ArrowCreator _arrowCreator = null;
     [SerializeField] private ArrowChecker _arrowChecker = null;
+    [SerializeField] private PersistGameManager _persistGameManager = null;
 
     [Header("Settings")]    
     [SerializeField] private float _beatsPerMin = 140;    
@@ -47,10 +48,18 @@ public class BeatChecker : MonoBehaviour
     public double _nextBeatCheckTimer = 0;
     public bool _isSpacePressedBeforeForthBeat = false;
 
+    void Awake()
+    {
+        _persistGameManager = FindObjectOfType<PersistGameManager>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {    
         DisableInputs();
+        _persistGameManager.FadeIn(1);
+        
+        _songs_SO = _persistGameManager._availableSongs[_persistGameManager._currentSongIndex];
         _gameStartTimer = 0;
         _isMusicStarted = false;
     } 

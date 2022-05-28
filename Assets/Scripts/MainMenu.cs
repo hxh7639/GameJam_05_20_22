@@ -13,10 +13,11 @@ public class MainMenu : MonoBehaviour
     public GameObject _optionsPanel;
     public GameObject _creditsPanel;
     public MenuSoundManager _menuSoundManager;
+    public PersistGameManager _persistGameManager;
 
     void Awake()
     {
-        Application.targetFrameRate = 450;
+        Application.targetFrameRate = 400;
     }
 
     // Start is called before the first frame update
@@ -24,6 +25,7 @@ public class MainMenu : MonoBehaviour
     {
         _menuSelectionIndex = 0;
         _menuSelections[_menuSelectionIndex].Select();
+        _persistGameManager.FadeIn(0);
     }
 
     // Update is called once per frame
@@ -35,27 +37,26 @@ public class MainMenu : MonoBehaviour
         {
             _menuSelectionIndex --;
             if(_menuSelectionIndex < 0) {_menuSelectionIndex = 4;}
-            _menuSoundManager.PlaySound(0);
-
+            _menuSoundManager.PlayMenuSound(0);
         }
 
         if(Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
         {
             _menuSelectionIndex ++;
             if(_menuSelectionIndex > 4) {_menuSelectionIndex = 0;}
-            _menuSoundManager.PlaySound(0);
+            _menuSoundManager.PlayMenuSound(0);
         }
 
 
         if(Input.GetKeyDown(KeyCode.Space))
         {
             _menuSelections[_menuSelectionIndex].onClick.Invoke();
-            _menuSoundManager.PlaySound(1);
+            _menuSoundManager.PlayMenuSound(1);
         }
 
         if(Input.GetKey(KeyCode.Return))
         {
-            _menuSoundManager.PlaySound(1);
+            _menuSoundManager.PlayMenuSound(1);
         }
 
         if(Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Backspace))
@@ -70,6 +71,13 @@ public class MainMenu : MonoBehaviour
 
     public void LoadScene(string sceneName)
     {
+        StartCoroutine(LoadSceneIE(sceneName));
+    }
+
+    public IEnumerator LoadSceneIE(string sceneName)
+    {        
+        _persistGameManager.FadeOut(2);
+        yield return new WaitForSeconds(2);
         SceneManager.LoadScene(sceneName.ToString());
     }
 
@@ -104,7 +112,7 @@ public class MainMenu : MonoBehaviour
 
         _menuSelectionIndex = 0;
         _menuSelections[_menuSelectionIndex].Select();
-        _menuSoundManager.PlaySound(2);
+        _menuSoundManager.PlayMenuSound(2);
 
     }
 

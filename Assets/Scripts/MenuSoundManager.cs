@@ -6,12 +6,15 @@ public class MenuSoundManager : MonoBehaviour
 {
     public AudioSource _audioSource;
     public List<AudioClip> _menuSoundFX = new List<AudioClip>();
+    public List<AudioClip> _storySoundFX = new List<AudioClip>();
+    public PersistGameManager _persistGameManager;
+
     void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
     }
 
-    public void PlaySound(int clipToPlay)
+    public void PlayMenuSound(int clipToPlay)
     {
         _audioSource.clip = _menuSoundFX[clipToPlay];
         if(clipToPlay == 2)
@@ -23,6 +26,45 @@ public class MenuSoundManager : MonoBehaviour
         }
         
         _audioSource.Play();
+    }
+
+    public IEnumerator PlayStorySound()
+    {
+        /* _audioSource.clip = _storySoundFX[0];
+        _audioSource.Play();
+        yield return new WaitForSeconds(_audioSource.clip.length - 6.5f);
+
+        _audioSource.clip = _storySoundFX[1];
+        //_audioSource.time = 
+        _audioSource.Play();
+        yield return new WaitForSeconds(_audioSource.clip.length);
+
+        _audioSource.clip = _storySoundFX[2];
+        _audioSource.Play();
+        yield return new WaitForSeconds(_audioSource.clip.length - 4); */
+
+        //temp
+        yield return new WaitForSeconds(1);
+
+        _persistGameManager.FadeIn(2);
+    }
+
+    public void PlayStorySFX(int clipToPlay)
+    {
+        _audioSource.clip = _storySoundFX[clipToPlay];   
+        if(clipToPlay == 3)
+        {
+            _audioSource.time = Random.Range(3f, 7f);
+        } else
+        {
+            _audioSource.time = 0f;
+        }     
+        _audioSource.Play();
+    }
+
+    public void StopStorySFX()
+    {
+        _audioSource.Stop();
     }
 
 }
