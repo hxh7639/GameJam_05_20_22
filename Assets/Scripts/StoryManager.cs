@@ -10,6 +10,7 @@ public class StoryManager : MonoBehaviour
     public PersistGameManager _persistGameManager;
     public int _convoIndex = 0;
     public GameObject _deathChatBubble;
+    public GameObject _deathStoryObj;
     public TMP_Text _deathChatText;
     public TMP_Text _playerChatText;
     public List<string> _chatTexts = new List<string>();
@@ -19,6 +20,10 @@ public class StoryManager : MonoBehaviour
     public TMP_Text _jobStoryText;
     public GameObject _howToPlayObj;
     public int _jobConvoIndex = 0;
+
+    //story part 2
+    public int _storyPartTwoIndex = 0;
+    public bool _isStoryPartTwoOpeningFinished = false;
 
 
     void Awake()
@@ -36,20 +41,21 @@ public class StoryManager : MonoBehaviour
             _jobStoryObj.SetActive(true);
             _jobStoryText.text = _storyTexts[0];  
             _jobConvoIndex ++;      
-            //_menuSoundManager.PlayStorySFX(3);
             _persistGameManager.FadeIn(1);
         }
         if(_persistGameManager._currentSongIndex == 1)
         {
-            _jobStoryObj.SetActive(false);
-            StartCoroutine(_menuSoundManager.PlayStorySound());
+            _jobStoryText.text = _storyTexts[4]; 
+            _jobStoryObj.SetActive(true);
+            _persistGameManager.FadeIn(1);            
         }
+
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-
         //story part 1
         if(_persistGameManager._currentSongIndex == 0)
         {
@@ -59,13 +65,13 @@ public class StoryManager : MonoBehaviour
                 {
                     _jobStoryText.text = _storyTexts[1];  
                     _jobConvoIndex ++;      
-                    //_menuSoundManager.PlayStorySFX(3);       
+                    _menuSoundManager.PlayStorySFX(5);       
                 } 
                 else if(_jobConvoIndex == 2)
                 {
                     _jobStoryText.text = _storyTexts[2];  
                     _jobConvoIndex ++;      
-                    //_menuSoundManager.PlayStorySFX(3);       
+                    _menuSoundManager.PlayStorySFX(5);       
                 } 
 
                 else if(_jobConvoIndex == 3)
@@ -95,22 +101,51 @@ public class StoryManager : MonoBehaviour
             
         }
 
-
+        //story part 2
 
         if(_persistGameManager._currentSongIndex == 1)
-        {
+        {            
             if(Input.GetKeyDown(KeyCode.Space))
             {
+                if (!_isStoryPartTwoOpeningFinished)
+                {
+                    //part 2 opening
+                    if(_storyPartTwoIndex < 1)
+                    {
+                        _jobStoryText.text = _storyTexts[5];
+                        _menuSoundManager.PlayStorySFX(5); 
+                        _storyPartTwoIndex++;
+                    } 
+                    else if(_storyPartTwoIndex == 1)
+                    {
+                        _jobStoryText.text = _storyTexts[6];
+                        _menuSoundManager.PlayStorySFX(5); 
+                        _storyPartTwoIndex++;
+                    }
+                    else if(_storyPartTwoIndex == 2)
+                    {
+                        _jobStoryObj.SetActive(false);
+                        _isStoryPartTwoOpeningFinished = true;
+                        _persistGameManager.FadeOut(1); 
+                        StartCoroutine(_menuSoundManager.PlayStorySound());
+                    }
+                    return;
+                }
+
+                
                 //odd#'s player, even's death
-                if(_convoIndex < 1)
+                /* if(_convoIndex < 1)
                 {
                     _menuSoundManager.StopStorySFX();
                     _deathChatText.text = _chatTexts[0];
+                    _deathStoryObj.SetActive(true);
                     _deathChatBubble.SetActive(true);   
                     _convoIndex ++;      
                     _menuSoundManager.PlayStorySFX(3);       
                 } 
-                else if(_convoIndex == 1)
+                else  */
+                
+                if(_convoIndex == 1)
                 {
                     _menuSoundManager.StopStorySFX();
                     _playerChatText.text = _chatTexts[1];
@@ -205,6 +240,17 @@ public class StoryManager : MonoBehaviour
         }
         
     }
+
+    public void DeathStoryStart()
+    {
+        _menuSoundManager.StopStorySFX();
+        _deathChatText.text = _chatTexts[0];
+        _deathStoryObj.SetActive(true);
+        _deathChatBubble.SetActive(true);   
+        _convoIndex ++;      
+        _menuSoundManager.PlayStorySFX(3);   
+    }
+
 
     public void LoadScene(string sceneName)
     {

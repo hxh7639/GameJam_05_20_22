@@ -171,10 +171,11 @@ MonoBehaviour:
   _persistGameManager: {fileID: 0}
   _convoIndex: 0
   _deathChatBubble: {fileID: 834593148}
+  _deathStoryObj: {fileID: 1429073559}
   _deathChatText: {fileID: 1856095538}
   _playerChatText: {fileID: 357506661}
   _chatTexts:
-  - Well, that would be the meat stick from your human form.
+  - Well, that there would be the meat stick from your human form.
   - What! What do you mean? Am I dead?
   - Yes, you are no longer a human, if that's what you are asking. On the other hand,
     congratulations on finishing your training!
@@ -189,21 +190,24 @@ MonoBehaviour:
   - I know I am good at it, and?
   - And let's not waste time, we need to get you back on your final assignment ASAP!
   - Okay? So what would I be doing?
-  - Of course, stamp more things!  Time you spent stamping as human would be nothing
+  - Of course, stamping more things!  Time you spent stamping as human would be nothing
     compare to this.
   - What . . .
   - Don't worry, it will at least be calming.
   _storyTexts:
   - You have been doing this job for a while.
   - You do it everyday.  Day after day, again and again.
-  - You are very good at it, but you are getting really tired of it
+  - You are very good at it, <br>but you are getting really tired of it
   - It's another day, let's just get it over with . . .
   - 'Finally, you are done for the day.  '
-  - What a drag, I just want to get home and rest . . .
+  - What a drag, I just want to get home and rest.
+  - ( You got into your car and started driving )
   _jobStoryObj: {fileID: 2070074589}
   _jobStoryText: {fileID: 2070074591}
   _howToPlayObj: {fileID: 1434667755}
   _jobConvoIndex: 0
+  _storyPartTwoIndex: 0
+  _isStoryPartTwoOpeningFinished: 0
 --- !u!1 &131858377
 GameObject:
   m_ObjectHideFlags: 0
@@ -315,7 +319,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 842, y: -783}
+  m_AnchoredPosition: {x: 842, y: -723}
   m_SizeDelta: {x: 1500, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &168395694
@@ -568,7 +572,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &357506660
 RectTransform:
   m_ObjectHideFlags: 0
@@ -950,7 +954,7 @@ PrefabInstance:
     - target: {fileID: 4990481375665638134, guid: d078d1ed9a9442948ae9a54c98029939,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4990481375665638135, guid: d078d1ed9a9442948ae9a54c98029939,
         type: 3}
@@ -965,7 +969,7 @@ PrefabInstance:
     - target: {fileID: 4990481375665638135, guid: d078d1ed9a9442948ae9a54c98029939,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4990481375665638135, guid: d078d1ed9a9442948ae9a54c98029939,
         type: 3}
@@ -1395,7 +1399,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1434667756
 RectTransform:
   m_ObjectHideFlags: 0

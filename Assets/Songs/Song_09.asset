@@ -15,8 +15,8 @@ MonoBehaviour:
   _audioClip: {fileID: 8300000, guid: 7405c0db1e5ac114f9a4d95be95748d0, type: 3}
   _beatsPerMin: 100.15
   _firstBeatTimer: 0.59
-  _songLastBeatTimer: 118.33
-  _endOfTheSongTime: 119
+  _songLastBeatTimer: 117.8
+  _endOfTheSongTime: 120
   _first4thBeatTimer: 2.387304
   _beatScale: 1
   _secPerBeatScaled: 0.59910136

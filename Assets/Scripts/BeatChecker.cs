@@ -73,7 +73,7 @@ public class BeatChecker : MonoBehaviour
         _endOfTheSongTime = _songs_SO._endOfTheSongTime;
 
         
-        _gameStartTimer = 0;
+        _gameStartTimer = 0.5f;
         _isMusicStarted = false;
     } 
 

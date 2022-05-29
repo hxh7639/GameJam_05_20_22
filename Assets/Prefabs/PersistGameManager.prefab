@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _availableSongs:
-  - {fileID: 11400000, guid: 9d09d0084b1305740b1db8e5a90e937f, type: 2}
+  - {fileID: 11400000, guid: 6cbd45ef7cb1ad74db444939ec2075c6, type: 2}
   - {fileID: 11400000, guid: 79f3577d0b8ad264392b25b221fc1524, type: 2}
   - {fileID: 11400000, guid: 4f620ca9213f68d4385fd42fc3ca4b9f, type: 2}
   - {fileID: 11400000, guid: b8aacb75802c66649b62923e26bd74d4, type: 2}

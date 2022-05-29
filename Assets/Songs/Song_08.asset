@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef7e2e69f9efa6c4c9979161cba7e34d, type: 3}
   m_Name: Song_08
   m_EditorClassIdentifier: 
-  _audioClip: {fileID: 8300000, guid: 48023a89e8f0d9947b7b219f70af0627, type: 3}
+  _audioClip: {fileID: 8300000, guid: a2d81a21be092764ab73237c12d8836b, type: 3}
   _beatsPerMin: 75.1
   _firstBeatTimer: 1.6
-  _songLastBeatTimer: 0
+  _songLastBeatTimer: 103.6
+  _endOfTheSongTime: 112
   _first4thBeatTimer: 3.9968042
   _beatScale: 1
   _secPerBeatScaled: 0.79893476
