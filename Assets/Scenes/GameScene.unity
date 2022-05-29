@@ -263,6 +263,8 @@ PlayableDirector:
   m_SceneBindings:
   - key: {fileID: 7965099354354869758, guid: 44cc3d144513e834182be1a47eaab8d9, type: 2}
     value: {fileID: 0}
+  - key: {fileID: 6604182458375835911, guid: 44cc3d144513e834182be1a47eaab8d9, type: 2}
+    value: {fileID: 0}
   m_ExposedReferences:
     m_References: []
 --- !u!4 &124673592
@@ -1165,6 +1167,12 @@ PrefabInstance:
       propertyPath: _gameStartAfterSeconds
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 2082799196285431371, guid: 3b55f1f0c133fc344b26341e8b9dd279,
+        type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24300002, guid: a48f2c965a1028341abe6003b0a53981,
+        type: 2}
     - target: {fileID: 2082799196285431372, guid: 3b55f1f0c133fc344b26341e8b9dd279,
         type: 3}
       propertyPath: m_Name
@@ -1179,6 +1187,41 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 683522681007611946, guid: d62e0bff0eb833e42aef7617544cf64e,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 683522681007611946, guid: d62e0bff0eb833e42aef7617544cf64e,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 975310938658280863, guid: d62e0bff0eb833e42aef7617544cf64e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7136691201946921381, guid: d62e0bff0eb833e42aef7617544cf64e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8006209833289227028, guid: d62e0bff0eb833e42aef7617544cf64e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8300047549077125778, guid: d62e0bff0eb833e42aef7617544cf64e,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1200
+      objectReference: {fileID: 0}
+    - target: {fileID: 8300047549077125778, guid: d62e0bff0eb833e42aef7617544cf64e,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 500
+      objectReference: {fileID: 0}
     - target: {fileID: 8745416701425229337, guid: d62e0bff0eb833e42aef7617544cf64e,
         type: 3}
       propertyPath: m_Pivot.x

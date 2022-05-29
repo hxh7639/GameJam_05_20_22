@@ -12,6 +12,8 @@ public class MainMenu : MonoBehaviour
     public GameObject _controlsPanel;
     public GameObject _optionsPanel;
     public GameObject _creditsPanel;
+    public GameObject _screenOverlay;
+    public GameObject _volumeReminder;
     public MenuSoundManager _menuSoundManager;
     public PersistGameManager _persistGameManager;
 
@@ -50,8 +52,9 @@ public class MainMenu : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            _menuSelections[_menuSelectionIndex].onClick.Invoke();
             _menuSoundManager.PlayMenuSound(1);
+            _menuSelections[_menuSelectionIndex].onClick.Invoke();
+            
         }
 
         if(Input.GetKey(KeyCode.Return))
@@ -85,18 +88,23 @@ public class MainMenu : MonoBehaviour
     {
         _selectionPanel.SetActive(false);
         _controlsPanel.SetActive(true);
+        _volumeReminder.SetActive(false);
     }
 
     public void ShowOptions()
     {
         _selectionPanel.SetActive(false);
         _optionsPanel.SetActive(true);
+        _screenOverlay.SetActive(false);
+        _volumeReminder.SetActive(false);
+        _menuSoundManager.PlayVolumeAdjustmentSong();
     }
 
     public void ShowCredits()
     {
         _selectionPanel.SetActive(false);
         _creditsPanel.SetActive(true);
+        _volumeReminder.SetActive(false);
     }
 
     public void ResetMenu()
@@ -105,10 +113,15 @@ public class MainMenu : MonoBehaviour
         {
             return;
         }
+        
         _selectionPanel.SetActive(true);
         _controlsPanel.SetActive(false);
         _optionsPanel.SetActive(false);
         _creditsPanel.SetActive(false);
+
+        _volumeReminder.SetActive(true);
+        _screenOverlay.SetActive(true);
+        _screenOverlay.GetComponent<Image>().CrossFadeAlpha(0, 1, false);
 
         _menuSelectionIndex = 0;
         _menuSelections[_menuSelectionIndex].Select();

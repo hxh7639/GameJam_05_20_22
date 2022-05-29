@@ -20,6 +20,9 @@ public class StoryManager : MonoBehaviour
     public TMP_Text _jobStoryText;
     public GameObject _howToPlayObj;
     public int _jobConvoIndex = 0;
+    public GameObject _spacebarObj;
+    public GameObject _downArrowToPressSpace;
+
 
     //story part 2
     public int _storyPartTwoIndex = 0;
@@ -41,6 +44,10 @@ public class StoryManager : MonoBehaviour
             _jobStoryObj.SetActive(true);
             _jobStoryText.text = _storyTexts[0];  
             _jobConvoIndex ++;      
+            _spacebarObj.SetActive(true);
+            _downArrowToPressSpace.SetActive(true);
+            LeanTween.moveLocalY(_downArrowToPressSpace, 275, 0);
+            LeanTween.moveLocalY(_downArrowToPressSpace, 225, 0.8f); 
             _persistGameManager.FadeIn(1);
         }
         if(_persistGameManager._currentSongIndex == 1)
@@ -65,12 +72,15 @@ public class StoryManager : MonoBehaviour
                 {
                     _jobStoryText.text = _storyTexts[1];  
                     _jobConvoIndex ++;      
+                    LeanTween.moveLocalY(_downArrowToPressSpace, 275, 0);
+                    LeanTween.moveLocalY(_downArrowToPressSpace, 225, 0.8f); 
                     _menuSoundManager.PlayStorySFX(5);       
                 } 
                 else if(_jobConvoIndex == 2)
                 {
                     _jobStoryText.text = _storyTexts[2];  
-                    _jobConvoIndex ++;      
+                    _jobConvoIndex ++;     
+                    _spacebarObj.SetActive(false); 
                     _menuSoundManager.PlayStorySFX(5);       
                 } 
 

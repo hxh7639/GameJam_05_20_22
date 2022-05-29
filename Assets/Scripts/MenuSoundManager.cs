@@ -7,11 +7,19 @@ public class MenuSoundManager : MonoBehaviour
     public AudioSource _audioSource;
     public List<AudioClip> _menuSoundFX = new List<AudioClip>();
     public List<AudioClip> _storySoundFX = new List<AudioClip>();
+    public AudioClip _volumeAdjustmentSong;
     public PersistGameManager _persistGameManager;
 
     void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
+    }
+
+    public void PlayVolumeAdjustmentSong()
+    {
+        _audioSource.clip = _volumeAdjustmentSong;
+        _audioSource.Play();
+        Debug.Log("PlayVolumeAdjustmentSong");
     }
 
     public void PlayMenuSound(int clipToPlay)

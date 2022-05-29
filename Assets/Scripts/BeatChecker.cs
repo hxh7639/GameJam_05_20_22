@@ -143,7 +143,8 @@ public class BeatChecker : MonoBehaviour
             {
                 Debug.Log("load Menu ");
                 _isLoadingNextScene = true;
-                LoadScene("Menu");
+                LoadScene("CreditScene");
+                //LoadScene("Menu");
             }else{
                 Debug.Log("load GameScene ");
                 _isLoadingNextScene = true;
